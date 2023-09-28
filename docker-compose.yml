@@ -1,0 +1,12 @@
+version: "2"
+
+services:
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    volumes:
+      - "./frontend/app:/app"
+      - "/app/node_modules"
+    tty: true
+    ports:
+      - "4000:5173"
