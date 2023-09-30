@@ -1,13 +1,14 @@
 FROM node:20.7
 
-WORKDIR /app
-
+# Update packages
 RUN apt-get update
-COPY ./app /app/
 
+# Setup /app as the workdir with src
+COPY ./app /app/
 WORKDIR /app/lms-frontend
 
+# Install npm packages
 RUN npm install
 
-
+# Run the Vite server
 CMD [ "npm", "run", "dev", "--", "--host" ]
