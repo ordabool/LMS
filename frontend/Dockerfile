@@ -5,7 +5,7 @@ RUN apt-get update
 
 # Setup /app as the workdir with src
 COPY ./app /app/
-WORKDIR /app/lms-frontend
+WORKDIR /app
 
 # Install npm packages
 RUN npm install
