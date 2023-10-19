@@ -19,7 +19,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', []);
-});
+})->name('/');
 
 Route::resource('semesters', SemesterController::class)
     ->only(['index'])

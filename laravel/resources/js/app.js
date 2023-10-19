@@ -1,5 +1,6 @@
-import '../css/app.css';
+import './bootstrap';
 import "primevue/resources/themes/bootstrap4-light-blue/theme.css";
+import 'primeicons/primeicons.css';
 
 import { createApp, h } from 'vue';
 import PrimeVue from 'primevue/config';
@@ -13,12 +14,11 @@ createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
-        const app = createApp({ render: () => h(App, props) })
+        return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
+            .use(PrimeVue)
             .mount(el);
-        app.use(PrimeVue);
-        return app;
     },
     progress: {
         color: '#4B5563',
