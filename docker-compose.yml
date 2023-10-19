@@ -5,8 +5,8 @@ services:
     build: .
     volumes:
       - "./:/lms"
-      - "/lms/app/vendor"
-      - "/lms/app/node_modules"
+      - "/lms/laravel/vendor"
+      - "/lms/laravel/node_modules"
     ports:
       - 3000:8000
 

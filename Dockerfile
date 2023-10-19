@@ -15,7 +15,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 
 # Setup /app as the workdir with src
 COPY ./ /lms/
-WORKDIR /lms/app
+WORKDIR /lms/laravel
 
 # Install NodeJS + NPM + Vite
 RUN apt install libxcb-xinerama0 libxcb-xkb1 libxcb-render-util0 xvfb -y
