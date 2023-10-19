@@ -1,23 +1,12 @@
 version: "2"
 
 services:
-  frontend:
-    container_name: frontend
-    build: ./frontend
+  lms:
+    build: .
     volumes:
-      - "./frontend/app:/app"
-      - "/app/node_modules"
-    tty: true
-    ports:
-      - "4000:5173"
-
-  backend:
-    container_name: backend
-    build: ./backend
-    tty: true
-    volumes:
-      - "./backend/app:/app"
-      - "/app/vendor"
+      - "./:/lms"
+      - "/lms/app/vendor"
+      - "/lms/app/node_modules"
     ports:
       - 3000:8000
 
@@ -39,6 +28,13 @@ services:
       - 8080:80
     environment:
       - PMA_ARBITRARY=1
+
+  mailpit:
+    image: axllent/mailpit
+    restart: unless-stopped
+    ports:
+      - 8025:8025
+      - 1025:1025
 
 volumes:
   db_data:
