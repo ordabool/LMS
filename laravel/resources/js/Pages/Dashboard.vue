@@ -7,7 +7,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <h1>Dasboard</h1>
+        <h1>Dashboard</h1>
     </AuthenticatedLayout>
 
 </template>
