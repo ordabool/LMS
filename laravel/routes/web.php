@@ -27,7 +27,7 @@ Route::get('/', function () {
 });
 
 Route::resource('semesters', SemesterController::class)
-    ->only(['index'])
+    ->only(['index', 'store'])
     ->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
