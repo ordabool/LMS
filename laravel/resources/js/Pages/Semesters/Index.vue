@@ -6,11 +6,13 @@ import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { useForm, Head } from '@inertiajs/vue3';
 
-const semester = useForm({
+const newSemester = useForm({
     name: '',
     start_date: null,
     end_date: null,
 });
+
+defineProps(['semesters']);
 </script>
 
 <template>
@@ -22,27 +24,35 @@ const semester = useForm({
         </template>
 
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-            <form @submit.prevent="semester.post(route('semesters.store'), { onSuccess: () => semester.reset() })">
+            <form @submit.prevent="newSemester.post(route('semesters.store'), { onSuccess: () => newSemester.reset() })">
                 <div class="flex flex-row py-2 justify-between items-center">
                     <label for="semesterName" class="flex w-1/3 text-base">Semester Name:</label>
-                    <InputText id="semesterName" type="text" v-model="semester.name" class="flex-initial w-2/3"/>
+                    <InputText id="semesterName" type="text" v-model="newSemester.name" class="flex-initial w-2/3"/>
                 </div>
-                <InputError :message="semester.errors.name" class="mb-4" />
+                <InputError :message="newSemester.errors.name" class="mb-4" />
 
                 <div class="flex flex-row py-2 justify-between items-center">
                     <label for="startDate" class="flex-initial w-1/3 text-base">Start Date:</label>
-                    <Calendar inputId="startDate" v-model="semester.start_date" class="flex-initial  w-2/3" dateFormat="dd/mm/yy" showButtonBar showIcon />
+                    <Calendar inputId="startDate" v-model="newSemester.start_date" class="flex-initial  w-2/3" dateFormat="dd/mm/yy" showButtonBar showIcon />
                 </div>
-                <InputError :message="semester.errors.start_date" class="mb-4" />
+                <InputError :message="newSemester.errors.start_date" class="mb-4" />
 
                 <div class="flex flex-row py-2 justify-between items-center">
                     <label for="endDate" class="flex-initial w-1/3 text-base">End Date:</label>
-                    <Calendar inputId="endDate" v-model="semester.end_date" class="flex-initial  w-2/3" dateFormat="dd/mm/yy" showButtonBar showIcon  />
+                    <Calendar inputId="endDate" v-model="newSemester.end_date" class="flex-initial  w-2/3" dateFormat="dd/mm/yy" showButtonBar showIcon  />
                 </div>
-                <InputError :message="semester.errors.end_date" class="mb-4" />
+                <InputError :message="newSemester.errors.end_date" class="mb-4" />
 
-                <PrimaryButton class="mt-4">Create Semester</PrimaryButton>
+                <div class="flex justify-around">
+                    <PrimaryButton class="mt-4">Create Semester</PrimaryButton>
+                </div>
             </form>
+
+            <ul class="mt-8">
+                <li v-for="semester in semesters">
+                    <span class="font-bold">{{ semester.name }}:</span> From {{ semester.start_date }}  to {{ semester.end_date }}
+                </li>
+            </ul>
 
 
 

@@ -18,7 +18,9 @@ class SemesterController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('Semesters/Index', []);
+        return Inertia::render('Semesters/Index', [
+            'semesters' => Semester::latest()->get()
+        ]);
     }
 
     /**
