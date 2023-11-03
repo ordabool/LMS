@@ -39,17 +39,17 @@ class SemesterController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // Convert DateTime string to Date
-        $startDate = date('Y-m-d', strtotime($request['start_date']));
-        $endDate = date('Y-m-d', strtotime($request['end_date']));
-        $request['start_date'] = $startDate;
-        $request['end_date'] = $endDate;
-
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
         ]);
+
+        // Convert DateTime string to Date
+        $startDate = date('Y-m-d', strtotime($validated['start_date']));
+        $endDate = date('Y-m-d', strtotime($validated['end_date']));
+        $validated['start_date'] = $startDate;
+        $validated['end_date'] = $endDate;
 
         $request->user()->semesters()->create($validated);
 

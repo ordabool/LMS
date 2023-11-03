@@ -23,19 +23,24 @@ const semester = useForm({
 
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
             <form @submit.prevent="semester.post(route('semesters.store'), { onSuccess: () => semester.reset() })">
-                <div class="flex p-2">
-                    <label for="semesterName" class="flex-initial w-1/3">Semester Name:</label>
-                    <InputText id="semesterName" type="text" v-model="semester.name" class="flex-initial  w-2/3"/>
+                <div class="flex flex-row py-2 justify-between items-center">
+                    <label for="semesterName" class="flex w-1/3 text-base">Semester Name:</label>
+                    <InputText id="semesterName" type="text" v-model="semester.name" class="flex-initial w-2/3"/>
                 </div>
-                <div class="flex p-2">
-                    <label for="startDate" class="flex-initial w-1/3">Start Date:</label>
+                <InputError :message="semester.errors.name" class="mb-4" />
+
+                <div class="flex flex-row py-2 justify-between items-center">
+                    <label for="startDate" class="flex-initial w-1/3 text-base">Start Date:</label>
                     <Calendar inputId="startDate" v-model="semester.start_date" class="flex-initial  w-2/3" dateFormat="dd/mm/yy" showButtonBar showIcon />
                 </div>
-                <div class="flex p-2">
-                    <label for="endDate" class="flex-initial w-1/3">End Date:</label>
+                <InputError :message="semester.errors.start_date" class="mb-4" />
+
+                <div class="flex flex-row py-2 justify-between items-center">
+                    <label for="endDate" class="flex-initial w-1/3 text-base">End Date:</label>
                     <Calendar inputId="endDate" v-model="semester.end_date" class="flex-initial  w-2/3" dateFormat="dd/mm/yy" showButtonBar showIcon  />
                 </div>
-                <!-- <textarea :placeholder="semester.errors.message"></textarea> -->
+                <InputError :message="semester.errors.end_date" class="mb-4" />
+
                 <PrimaryButton class="mt-4">Create Semester</PrimaryButton>
             </form>
 
